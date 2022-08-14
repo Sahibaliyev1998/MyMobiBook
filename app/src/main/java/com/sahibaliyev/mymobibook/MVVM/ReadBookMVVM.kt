@@ -28,6 +28,8 @@ class ReadBookMVVM ( val fileDir : File) : ViewModel(){
         val file = "$dirPath / $fileName"
         pdfName = File(file)
         if (pdfName.exists()){
+
+            Log.e("===" ,"eror")
             pdfName.delete()
         }
     }
@@ -46,6 +48,7 @@ class ReadBookMVVM ( val fileDir : File) : ViewModel(){
 
                         val result = response.body()?.byteStream()
                         result?.let {
+
 
                             writeToFile(it)
                         }?:kotlin.run {
@@ -82,7 +85,6 @@ class ReadBookMVVM ( val fileDir : File) : ViewModel(){
             fos.close()
             isFileReadyObserver.postValue(true)
         }catch (e : IOException){
-            Log.e("===" , "error9" +e)
             isFileReadyObserver.postValue(false)
         }
     }

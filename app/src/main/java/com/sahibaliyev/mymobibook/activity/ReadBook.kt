@@ -80,12 +80,11 @@ class ReadBook : AppCompatActivity() {
 
                 }catch (e:IOException){
                     Toast.makeText(this , "Failed Download" , Toast.LENGTH_SHORT).show()
-
                 }
             }
         })
 
-        viewModel.downloadPdfFile("https://hzarrdyrkhvkgcabonmq.supabase.co/storage/v1/object/public/bookpdf/Uyumsuz.pdf")
+        viewModel.downloadPdfFile("https://firebasestorage.googleapis.com/v0/b/mobibook-2fd46.appspot.com/o/_Uyumsuz.pdf?alt=media&token=e71453ce-4551-490d-8089-850e8968d9a0")
 
 
     }
