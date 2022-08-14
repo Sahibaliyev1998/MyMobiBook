@@ -46,19 +46,16 @@ class ReadBook : AppCompatActivity() {
             }
         })[ReadBookMVVM::class.java]
 
-        viewModel.isFileReadyObserver.observe(this , Observer{
+        viewModel.isFileReadyObserver.observe(this, Observer {
             bin.pbReadBook.visibility = View.GONE
 
-            if (!it){
-                Toast.makeText(this , "Failed to Download" , Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(this , "PDF Download Successful" , Toast.LENGTH_SHORT).show()
+            if (!it) {
+                Toast.makeText(this, "Failed to Download", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "PDF Download Successful", Toast.LENGTH_SHORT).show()
                 try {
 
-                    bin.pdfView.fromUri(FileProvider.getUriForFile(
-                        applicationContext ,
-                        "com.sahibaliyev.mymobibook.fileprovider" ,
-                        viewModel.getPdfFileUri()))
+                    bin.pdfView.fromUri(FileProvider.getUriForFile(applicationContext, "com.sahibaliyev.mymobibook.fileprovider" , viewModel.getPdfFileUri()))
                         .load()
 
                 }catch (e:IOException){
@@ -67,7 +64,7 @@ class ReadBook : AppCompatActivity() {
             }
         })
 
-        viewModel.downloadPdfFile("https://firebasestorage.googleapis.com/v0/b/mobibook-2fd46.appspot.com/o/_Uyumsuz.pdf?alt=media&token=e71453ce-4551-490d-8089-850e8968d9a0")
+        viewModel.downloadPdfFile("https://hzarrdyrkhvkgcabonmq.supabase.co/storage/v1/object/public/bookpdf/Uyumsuz.pdf")
 
 
     }

@@ -1,5 +1,6 @@
 package com.sahibaliyev.mymobibook.MVVM
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sahibaliyev.mymobibook.other.RetrofitInstance
@@ -24,10 +25,9 @@ class ReadBookMVVM ( val fileDir : File) : ViewModel(){
             dirFile.mkdirs()
         }
         fileName ="Uyumsuz.pdf"
-        val file = "$dirPath / $fileName"
+        val file = "$dirPath/$fileName"
         pdfName = File(file)
         if (pdfName.exists()){
-
             pdfName.delete()
         }
     }
@@ -78,6 +78,7 @@ class ReadBookMVVM ( val fileDir : File) : ViewModel(){
             fos.close()
             isFileReadyObserver.postValue(true)
         }catch (e : IOException){
+            Log.e("===" , "error" , e )
             isFileReadyObserver.postValue(false)
         }
     }
