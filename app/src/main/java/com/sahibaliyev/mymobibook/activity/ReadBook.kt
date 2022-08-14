@@ -15,6 +15,7 @@ import com.sahibaliyev.mymobibook.MVVM.ReadBookMVVM
 import com.sahibaliyev.mymobibook.databinding.ActivityReadBookBinding
 import java.io.IOException
 
+@Suppress("UNCHECKED_CAST", "RedundantSamConstructor")
 class ReadBook : AppCompatActivity() {
     //https://drive.google.com/file/d/1AXr8CEZ46j6qDKIFLhfNePDC1OoQjwC2/view
     private lateinit var bin: ActivityReadBookBinding
@@ -22,7 +23,6 @@ class ReadBook : AppCompatActivity() {
 
 
     private var bookId = ""
-
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -36,14 +36,14 @@ class ReadBook : AppCompatActivity() {
         initViewModel()
     }
 
-    private fun initViewModel(){
+    private fun initViewModel() {
 
-        Log.e("====" ,"error1")
+        Log.e("====", "error1")
 
 
-        viewModel = ViewModelProvider(this , object : ViewModelProvider.NewInstanceFactory(){
+        viewModel = ViewModelProvider(this, object : ViewModelProvider.NewInstanceFactory() {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return ReadBookMVVM(fileDir=filesDir) as T
+                return ReadBookMVVM(fileDir = filesDir) as T
 
             }
         })[ReadBookMVVM::class.java]
@@ -58,7 +58,7 @@ class ReadBook : AppCompatActivity() {
                 Toast.makeText(this, "PDF Download Successful", Toast.LENGTH_SHORT).show()
                 try {
 
-                    Log.e("====" ,"error2")
+                    Log.e("====", "error2")
                     bin.pdfView.fromUri(
                         FileProvider.getUriForFile(
                             applicationContext,
@@ -70,7 +70,6 @@ class ReadBook : AppCompatActivity() {
 
                 } catch (e: IOException) {
                     Toast.makeText(this, "Failed Download", Toast.LENGTH_SHORT).show()
-
 
                 }
             }
