@@ -1,6 +1,5 @@
 package com.sahibaliyev.mymobibook.MVVM
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sahibaliyev.mymobibook.other.RetrofitInstance
@@ -29,11 +28,9 @@ class ReadBookMVVM ( val fileDir : File) : ViewModel(){
         pdfName = File(file)
         if (pdfName.exists()){
 
-            Log.e("===" ,"eror")
             pdfName.delete()
         }
     }
-
     fun getPdfFileUri() : File = pdfName
 
     fun downloadPdfFile(pdfUrl:String){
@@ -66,14 +63,10 @@ class ReadBookMVVM ( val fileDir : File) : ViewModel(){
 
 
     private fun writeToFile(inputStream: InputStream){
-
         try {
-
-
             val fileReader = ByteArray(4096)
             var fileSizeDownloaded = 0
             val fos :OutputStream = FileOutputStream(pdfName)
-
             do{
                 val read = inputStream.read(fileReader)
                 if (read != -1){
@@ -88,5 +81,6 @@ class ReadBookMVVM ( val fileDir : File) : ViewModel(){
             isFileReadyObserver.postValue(false)
         }
     }
+
 
 }

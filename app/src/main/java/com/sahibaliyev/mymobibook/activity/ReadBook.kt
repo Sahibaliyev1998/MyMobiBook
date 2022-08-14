@@ -37,23 +37,6 @@ class ReadBook : AppCompatActivity() {
         initViewModel()
     }
 
-    /* private fun loadBookDetails(){
-         bin.pdfView.fromUri(FileProvider.getUriForFile(applicationContext ,
-             "com.sahibaliyev.mymobibook.fileprovider" ,
-             viewModel.getPdfFileUri()))
-
-             .swipeHorizontal(false)
-             .onPageChange{page , pageCount->
-                 val currentPage = page+1
-                 *//*bin.subtitle.text = "$currentPage / $pageCount"*//*
-            }
-            .load()
-
-
-    }*/
-
-
-    @Suppress("UNCHECKED_CAST")
     private fun initViewModel(){
 
 
@@ -63,13 +46,13 @@ class ReadBook : AppCompatActivity() {
             }
         })[ReadBookMVVM::class.java]
 
-        viewModel.isFileReadyObserver.observe(this , Observer {
+        viewModel.isFileReadyObserver.observe(this , Observer{
             bin.pbReadBook.visibility = View.GONE
 
             if (!it){
                 Toast.makeText(this , "Failed to Download" , Toast.LENGTH_SHORT).show()
             }else{
-                Toast.makeText(this , "PDF Download Succesfull" , Toast.LENGTH_SHORT).show()
+                Toast.makeText(this , "PDF Download Successful" , Toast.LENGTH_SHORT).show()
                 try {
 
                     bin.pdfView.fromUri(FileProvider.getUriForFile(
