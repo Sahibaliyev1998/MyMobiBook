@@ -2,7 +2,6 @@ package com.sahibaliyev.mymobibook.activity
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -17,13 +16,12 @@ import java.io.IOException
 
 @Suppress("UNCHECKED_CAST", "RedundantSamConstructor")
 class ReadBook : AppCompatActivity() {
-    //https://drive.google.com/file/d/1AXr8CEZ46j6qDKIFLhfNePDC1OoQjwC2/view
+
     private lateinit var bin: ActivityReadBookBinding
     private lateinit var viewModel : ReadBookMVVM
 
 
     private var bookId = ""
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,11 +33,7 @@ class ReadBook : AppCompatActivity() {
 
         initViewModel()
     }
-
     private fun initViewModel() {
-
-        Log.e("====", "error1")
-
 
         viewModel = ViewModelProvider(this, object : ViewModelProvider.NewInstanceFactory() {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -57,8 +51,6 @@ class ReadBook : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "PDF Download Successful", Toast.LENGTH_SHORT).show()
                 try {
-
-                    Log.e("====", "error2")
                     bin.pdfView.fromUri(
                         FileProvider.getUriForFile(
                             applicationContext,
