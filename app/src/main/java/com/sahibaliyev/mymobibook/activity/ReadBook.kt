@@ -55,11 +55,17 @@ class ReadBook : AppCompatActivity() {
                 Toast.makeText(this, "PDF Download Successful", Toast.LENGTH_SHORT).show()
                 try {
 
-                    bin.pdfView.fromUri(FileProvider.getUriForFile(applicationContext, "com.sahibaliyev.mymobibook.fileprovider" , viewModel.getPdfFileUri()))
+                    bin.pdfView.fromUri(
+                        FileProvider.getUriForFile(
+                            applicationContext,
+                            "com.sahibaliyev.mymobibook.fileprovider",
+                            viewModel.getPdfFileUri()
+                        )
+                    )
                         .load()
 
-                }catch (e:IOException){
-                    Toast.makeText(this , "Failed Download" , Toast.LENGTH_SHORT).show()
+                } catch (e: IOException) {
+                    Toast.makeText(this, "Failed Download", Toast.LENGTH_SHORT).show()
                 }
             }
         })

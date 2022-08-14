@@ -78,7 +78,7 @@ class ReadBookMVVM ( val fileDir : File) : ViewModel(){
             fos.close()
             isFileReadyObserver.postValue(true)
         }catch (e : IOException){
-            Log.e("===" , "error" , e )
+            Log.e("===", "error", e)
             isFileReadyObserver.postValue(false)
         }
     }
