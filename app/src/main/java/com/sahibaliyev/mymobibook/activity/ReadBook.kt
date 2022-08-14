@@ -2,6 +2,7 @@ package com.sahibaliyev.mymobibook.activity
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -32,17 +33,18 @@ class ReadBook : AppCompatActivity() {
 
         bookId=intent.getStringExtra("bookId")!!
 
-        //loadBookDetails()
-
         initViewModel()
     }
 
     private fun initViewModel(){
 
+        Log.e("====" ,"error1")
+
 
         viewModel = ViewModelProvider(this , object : ViewModelProvider.NewInstanceFactory(){
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 return ReadBookMVVM(fileDir=filesDir) as T
+
             }
         })[ReadBookMVVM::class.java]
 
@@ -50,11 +52,13 @@ class ReadBook : AppCompatActivity() {
             bin.pbReadBook.visibility = View.GONE
 
             if (!it) {
+
                 Toast.makeText(this, "Failed to Download", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "PDF Download Successful", Toast.LENGTH_SHORT).show()
                 try {
 
+                    Log.e("====" ,"error2")
                     bin.pdfView.fromUri(
                         FileProvider.getUriForFile(
                             applicationContext,
@@ -66,12 +70,13 @@ class ReadBook : AppCompatActivity() {
 
                 } catch (e: IOException) {
                     Toast.makeText(this, "Failed Download", Toast.LENGTH_SHORT).show()
+
+
                 }
             }
         })
 
         viewModel.downloadPdfFile("https://hzarrdyrkhvkgcabonmq.supabase.co/storage/v1/object/public/bookpdf/Uyumsuz.pdf")
-
 
     }
 

@@ -64,7 +64,7 @@ class ReadBookMVVM ( val fileDir : File) : ViewModel(){
 
     private fun writeToFile(inputStream: InputStream){
         try {
-            val fileReader = ByteArray(4096)
+            val fileReader = ByteArray(4098)
             var fileSizeDownloaded = 0
             val fos :OutputStream = FileOutputStream(pdfName)
             do{
