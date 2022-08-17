@@ -2,6 +2,7 @@ package com.sahibaliyev.mymobibook.activity
 
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -37,7 +38,9 @@ class ReadBook : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this, object : ViewModelProvider.NewInstanceFactory() {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return ReadBookMVVM(fileDir = filesDir) as T
+                return ReadBookMVVM(fileDir = applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)!!,
+                    application = application
+                ) as T
 
             }
         })[ReadBookMVVM::class.java]
@@ -51,14 +54,15 @@ class ReadBook : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "PDF Download Successful", Toast.LENGTH_SHORT).show()
                 try {
-                    bin.pdfView.fromUri(
+                    /*bin.pdfView.fromUri(
                         FileProvider.getUriForFile(
                             applicationContext,
                             "com.sahibaliyev.mymobibook.fileprovider",
                             viewModel.getPdfFileUri()
                         )
                     )
-                        .load()
+                        .load()*/
+                    bin.pdfView.fromFile(viewModel.getPdfFileUri()).load()
 
                 } catch (e: IOException) {
                     Toast.makeText(this, "Failed Download", Toast.LENGTH_SHORT).show()
