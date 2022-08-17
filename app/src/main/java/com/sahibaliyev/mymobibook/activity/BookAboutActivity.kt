@@ -1,8 +1,8 @@
 package com.sahibaliyev.mymobibook.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -13,7 +13,6 @@ import com.karumi.dexter.listener.single.PermissionListener
 import com.sahibaliyev.mymobibook.databinding.ActivityBookAboutBinding
 import com.sahibaliyev.mymobibook.databinding.ActivityBookAboutBinding.inflate
 import com.sahibaliyev.mymobibook.other.fullScreen
-import java.util.jar.Manifest
 
 class BookAboutActivity : AppCompatActivity() {
     private lateinit var  binding: ActivityBookAboutBinding
@@ -31,28 +30,30 @@ class BookAboutActivity : AppCompatActivity() {
         fullScreen(window)
 
         runtimePermission()
+        val pdf = intent.getStringExtra("pdf")
 
 
 
 
         binding.btnRead.setOnClickListener {
             val i = Intent(this, ReadBook::class.java)
-            i.putExtra("bookId" , bookId)
+            i.putExtra("bookId", bookId)
+            i.putExtra("pdf", pdf)
             startActivity(i)
         }
 
         loadData()
     }
 
-    fun loadData(){
+    fun loadData() {
 
-       Glide.with(this)
+        Glide.with(this)
             .load(intent.getStringExtra("image"))
             .into(binding.imgBook)
 
-        binding.txtName.setText(intent.getStringExtra("name"))
-        binding.txtCategory.setText(intent.getStringExtra("category"))
-        binding.txtDescription.setText(intent.getStringExtra("description"))
+        binding.txtName.text = intent.getStringExtra("name")
+        binding.txtCategory.text = intent.getStringExtra("category")
+        binding.txtDescription.text = intent.getStringExtra("description")
     }
 
     fun runtimePermission(){

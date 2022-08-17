@@ -54,14 +54,7 @@ class ReadBook : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "PDF Download Successful", Toast.LENGTH_SHORT).show()
                 try {
-                    /*bin.pdfView.fromUri(
-                        FileProvider.getUriForFile(
-                            applicationContext,
-                            "com.sahibaliyev.mymobibook.fileprovider",
-                            viewModel.getPdfFileUri()
-                        )
-                    )
-                        .load()*/
+
                     bin.pdfView.fromFile(viewModel.getPdfFileUri()).load()
 
                 } catch (e: IOException) {
@@ -71,8 +64,10 @@ class ReadBook : AppCompatActivity() {
             }
         })
 
-        viewModel.downloadPdfFile("https://hzarrdyrkhvkgcabonmq.supabase.co/storage/v1/object/public/bookpdf/Uyumsuz.pdf")
+        //viewModel.downloadPdfFile("https://hzarrdyrkhvkgcabonmq.supabase.co/storage/v1/object/public/bookpdf/Uyumsuz.pdf")
 
+
+        intent.getStringExtra("pdf")?.let { viewModel.downloadPdfFile(it) }
     }
 
 }

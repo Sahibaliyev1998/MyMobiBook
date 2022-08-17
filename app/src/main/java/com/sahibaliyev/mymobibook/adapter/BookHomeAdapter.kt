@@ -1,14 +1,10 @@
 package com.sahibaliyev.mymobibook.adapter
 
 import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sahibaliyev.mymobibook.activity.BookAboutActivity
-import com.sahibaliyev.mymobibook.activity.MainActivity
-import com.sahibaliyev.mymobibook.activity.ReadBook
 import com.sahibaliyev.mymobibook.databinding.ItemHomeBinding
 import com.sahibaliyev.mymobibook.model.BookModel
 import com.squareup.picasso.Picasso
@@ -42,11 +38,12 @@ class BookHomeAdapter(private val bookList: ArrayList<BookModel>) : RecyclerView
 
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView.context, BookAboutActivity::class.java)
-            intent.putExtra("book",bookList.get(position))
-                .putExtra("image" ,bookList.get(position).image)
-                .putExtra("name" , bookList.get(position).name)
-                .putExtra("description" , bookList.get(position).description)
-                .putExtra("category" , bookList.get(position).category)
+            intent.putExtra("book", bookList.get(position))
+                .putExtra("image", bookList.get(position).image)
+                .putExtra("name", bookList.get(position).name)
+                .putExtra("description", bookList.get(position).description)
+                .putExtra("category", bookList.get(position).category)
+                .putExtra("pdf", bookList.get(position).pdf)
             holder.itemView.context.startActivity(intent)
         }
 
