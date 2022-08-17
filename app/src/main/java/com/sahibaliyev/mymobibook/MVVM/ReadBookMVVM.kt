@@ -1,12 +1,10 @@
 package com.sahibaliyev.mymobibook.MVVM
 
 import android.app.Application
-import android.content.Context
 import android.os.Environment
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.sahibaliyev.mymobibook.other.RetrofitInstance
 import com.sahibaliyev.mymobibook.service.BookAPI
 import okhttp3.ResponseBody
@@ -38,6 +36,7 @@ class ReadBookMVVM (application: Application, val fileDir : File) : AndroidViewM
     fun getPdfFileUri() : File = pdfName
 
     fun downloadPdfFile(pdfUrl:String){
+
         thread {
             val bookApi = RetrofitInstance.getRetrofitInstance().create(BookAPI::class.java)
             bookApi.downloadPdfFile(pdfUrl).enqueue(object  : Callback<ResponseBody> {
@@ -49,8 +48,6 @@ class ReadBookMVVM (application: Application, val fileDir : File) : AndroidViewM
 
                         val result = response.body()?.byteStream()
                         result?.let {
-
-
                             writeToFile(it)
                         }?:kotlin.run {
                             isFileReadyObserver.postValue(false)
@@ -64,7 +61,6 @@ class ReadBookMVVM (application: Application, val fileDir : File) : AndroidViewM
             })
         }
     }
-
 
     private fun writeToFile(inputStream: InputStream){
         try {

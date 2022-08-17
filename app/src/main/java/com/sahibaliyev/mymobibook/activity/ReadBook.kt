@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -38,7 +37,8 @@ class ReadBook : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this, object : ViewModelProvider.NewInstanceFactory() {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return ReadBookMVVM(fileDir = applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)!!,
+                return ReadBookMVVM(
+                    fileDir = applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)!!,
                     application = application
                 ) as T
 
