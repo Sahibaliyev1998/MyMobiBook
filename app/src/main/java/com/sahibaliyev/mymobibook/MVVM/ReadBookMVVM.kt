@@ -1,8 +1,10 @@
 package com.sahibaliyev.mymobibook.MVVM
 
+import android.app.Application
+import android.os.Environment
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.sahibaliyev.mymobibook.other.RetrofitInstance
 import com.sahibaliyev.mymobibook.service.BookAPI
 import okhttp3.ResponseBody
@@ -12,14 +14,14 @@ import retrofit2.Response
 import java.io.*
 import kotlin.concurrent.thread
 
-class ReadBookMVVM ( val fileDir : File) : ViewModel(){
+class ReadBookMVVM (application: Application, val fileDir : File) : AndroidViewModel(application){
     private var pdfName : File
     private var dirPath :String
     private var fileName : String
     var isFileReadyObserver = MutableLiveData<Boolean>()
 
     init {
-        dirPath ="${fileDir}/cert/pdffiles"
+        dirPath = application.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).toString()
         val dirFile = File(dirPath)
         if(!dirFile.exists()){
             dirFile.mkdirs()
@@ -34,6 +36,7 @@ class ReadBookMVVM ( val fileDir : File) : ViewModel(){
     fun getPdfFileUri() : File = pdfName
 
     fun downloadPdfFile(pdfUrl:String){
+
         thread {
             val bookApi = RetrofitInstance.getRetrofitInstance().create(BookAPI::class.java)
             bookApi.downloadPdfFile(pdfUrl).enqueue(object  : Callback<ResponseBody> {
@@ -45,8 +48,6 @@ class ReadBookMVVM ( val fileDir : File) : ViewModel(){
 
                         val result = response.body()?.byteStream()
                         result?.let {
-
-
                             writeToFile(it)
                         }?:kotlin.run {
                             isFileReadyObserver.postValue(false)
@@ -60,7 +61,6 @@ class ReadBookMVVM ( val fileDir : File) : ViewModel(){
             })
         }
     }
-
 
     private fun writeToFile(inputStream: InputStream){
         try {
