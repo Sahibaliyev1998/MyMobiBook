@@ -64,8 +64,6 @@ class ReadBook : AppCompatActivity() {
             }
         })
 
-        //viewModel.downloadPdfFile("https://hzarrdyrkhvkgcabonmq.supabase.co/storage/v1/object/public/bookpdf/Uyumsuz.pdf")
-
 
         intent.getStringExtra("pdf")?.let { viewModel.downloadPdfFile(it) }
     }
