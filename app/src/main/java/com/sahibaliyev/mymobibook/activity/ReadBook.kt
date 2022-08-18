@@ -50,15 +50,15 @@ class ReadBook : AppCompatActivity() {
 
             if (!it) {
 
-                Toast.makeText(this, "Failed to Download", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Failed to Download", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "PDF Download Successful", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "PDF Download Successful", Toast.LENGTH_SHORT).show()
                 try {
 
                     bin.pdfView.fromFile(viewModel.getPdfFileUri()).load()
 
                 } catch (e: IOException) {
-                    Toast.makeText(this, "Failed Download", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this, "Failed Download", Toast.LENGTH_SHORT).show()
 
                 }
             }
