@@ -1,8 +1,7 @@
 package com.sahibaliyev.mymobibook.activity
 
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.sahibaliyev.mymobibook.R
 import com.sahibaliyev.mymobibook.databinding.ActivityDashboardBinding
@@ -30,7 +29,6 @@ class DashboardActivity : AppCompatActivity() {
         binding.bnbDashboard.setItemSelected(R.id.home , true)
 
         frm()
-
 
 
     }

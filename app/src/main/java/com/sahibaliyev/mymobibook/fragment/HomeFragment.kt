@@ -1,15 +1,14 @@
 package com.sahibaliyev.mymobibook.fragment
 
 import android.os.Bundle
-import android.util.Base64
-import android.util.Base64.encodeToString
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sahibaliyev.mymobibook.adapter.BookHomeAdapter
 import com.sahibaliyev.mymobibook.databinding.FragmentHomeBinding
+import com.sahibaliyev.mymobibook.databinding.ItemHomeBinding
 import com.sahibaliyev.mymobibook.model.BookModel
 import com.sahibaliyev.mymobibook.service.BookAPI
 import retrofit2.Call
@@ -17,8 +16,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
-import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment(), BookHomeAdapter.Listener {
 
@@ -36,7 +33,17 @@ class HomeFragment : Fragment(), BookHomeAdapter.Listener {
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         binding.homeRV.layoutManager = GridLayoutManager(context, 3)
+//Adapterden checkbox
+        val bind = ItemHomeBinding.inflate(LayoutInflater.from(context))
 
+        bind.cbFavorit.setOnCheckedChangeListener { checkBox, isChecked ->
+            if (isChecked) {
+
+            } else {
+
+            }
+        }
+//<-
         loadData()
         return binding.root
     }

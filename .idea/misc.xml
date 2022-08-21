@@ -31,10 +31,17 @@
         <entry key="..\:/Users/Sahib/AndroidStudioProjects/MyMobiBook/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
         <entry key="..\:/Users/Sahib/AndroidStudioProjects/MyMobiBook/app/src/main/res/xml/file_path.xml" value="0.18432971014492755" />
         <entry key="..\:/Users/Sahib/AndroidStudioProjects/MyMobiBook/app/src/main/res/xml/file_provider_path.xml" value="0.18432971014492755" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/MyMobiBook/app/src/main/res/drawable/ic_favno.xml" value="0.156" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/MyMobiBook/app/src/main/res/drawable/ic_favyes.xml" value="0.156" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/MyMobiBook/app/src/main/res/drawable/ic_heart.xml" value="0.156" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/MyMobiBook/app/src/main/res/drawable/selector_favority_item.xml" value="0.156" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/MyMobiBook/app/src/main/res/layout/activity_book_about.xml" value="0.14444444444444443" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/MyMobiBook/app/src/main/res/layout/activity_dashboard.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/MyMobiBook/app/src/main/res/layout/activity_read_book.xml" value="0.17708333333333334" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/MyMobiBook/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/lenovo/AndroidStudioProjects/MyMobiBook/app/src/main/res/layout/splash_screen.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/MyMobiBook/app/src/main/res/layout/fragment_profil.xml" value="0.36186594202898553" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/MyMobiBook/app/src/main/res/layout/item_home.xml" value="0.36186594202898553" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/MyMobiBook/app/src/main/res/layout/splash_screen.xml" value="0.135678391959799" />
       </map>
     </option>
   </component>

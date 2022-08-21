@@ -29,17 +29,18 @@ class ReadBookMVVM (application: Application, val fileDir : File) : AndroidViewM
         fileName ="Uyumsuz.pdf"
         val file = "$dirPath/$fileName"
         pdfName = File(file)
+
         if (pdfName.exists()){
             pdfName.delete()
         }
     }
     fun getPdfFileUri() : File = pdfName
 
-    fun downloadPdfFile(pdfUrl:String){
+    fun downloadPdfFile(pdfUrl: String) {
 
         thread {
             val bookApi = RetrofitInstance.getRetrofitInstance().create(BookAPI::class.java)
-            bookApi.downloadPdfFile(pdfUrl).enqueue(object  : Callback<ResponseBody> {
+            bookApi.downloadPdfFile(pdfUrl).enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
                     response: Response<ResponseBody>
@@ -49,12 +50,12 @@ class ReadBookMVVM (application: Application, val fileDir : File) : AndroidViewM
                         val result = response.body()?.byteStream()
                         result?.let {
                             writeToFile(it)
-                        }?:kotlin.run {
+                        } ?: kotlin.run {
                             isFileReadyObserver.postValue(false)
                         }
-                    }
-                    else isFileReadyObserver.postValue(false)
+                    } else isFileReadyObserver.postValue(false)
                 }
+
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                     isFileReadyObserver.postValue(false)
                 }

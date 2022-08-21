@@ -18,16 +18,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" >
+            tools:src="@tools:sample/avatars">
 
         </ImageView>
-        <ImageButton
+
+        <CheckBox
+            android:id="@+id/cbFavorit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_favno"
+            android:button="@drawable/selector_favority_item"
             app:layout_constraintTop_toTopOf="@id/imgBook"
-            app:layout_constraintEnd_toEndOf="@id/imgBook"
-            android:background="#006E7076"/>
+            app:layout_constraintEnd_toEndOf="@id/imgBook" />
+
         <TextView
             android:id="@+id/txtName"
             android:layout_width="110dp"

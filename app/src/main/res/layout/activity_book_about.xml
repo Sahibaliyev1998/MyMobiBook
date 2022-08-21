@@ -50,7 +50,7 @@
             android:id="@+id/txtName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ImgNAme"
+            android:text=""
             android:textSize="24sp"
             android:layout_marginTop="11dp"
             android:textColor="@color/white"
@@ -62,7 +62,7 @@
             android:id="@+id/txtCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bilim"
+            android:text=""
             android:textSize="12sp"
             android:layout_marginTop="11dp"
             app:layout_constraintStart_toStartOf="@+id/txtName"
@@ -73,30 +73,30 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clBookName"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/clBookName">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="15dp"
             android:layout_marginEnd="15dp"
-            android:scrollbars="vertical"
+            android:layout_marginBottom="15dp"
             android:scrollbarSize="1dp"
+            android:scrollbarStyle="insideInset"
             android:scrollbarThumbVertical="@color/silver"
             android:scrollbarTrackVertical="@color/darksilver"
-            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
             app:layout_constraintBottom_toTopOf="@+id/btnRead"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -106,8 +106,8 @@
                 android:id="@+id/txtDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:textColor="#6e7076"
+                android:textSize="18sp"
                 android:textStyle="bold|italic"
                 app:layout_constraintBottom_toTopOf="@+id/btnRead"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -119,6 +119,7 @@
             android:id="@+id/btnRead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/button_gradient"
             android:paddingStart="25dp"
             android:paddingEnd="25dp"
@@ -126,8 +127,7 @@
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="15dp"/>
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
