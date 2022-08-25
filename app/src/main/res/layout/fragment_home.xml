@@ -8,7 +8,7 @@
     android:background="@drawable/wp_01"
     tools:context=".fragment.HomeFragment">
 
-    <!--<EditText
+    <EditText
         android:id="@+id/etSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,28 +25,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck"
-        />-->
+        />
 
-    <SearchView
-        android:id="@+id/etSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/shape_edittext"
-        android:drawableStart="@drawable/ic_search"
-        android:hint="@string/search"
-        android:inputType="text"
-        android:padding="10dp"
-        android:textColorHint="#CCCCCC"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/homeRV"
+        android:id="@+id/rv_home"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"

@@ -1,6 +1,8 @@
 package com.sahibaliyev.mymobibook.fragment
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,14 +18,15 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.Exception
 
 class HomeFragment : Fragment(), BookHomeAdapter.Listener {
 
 
     private val BASE_URL = "https://raw.githubusercontent.com/"
-    private var bookModel: ArrayList<BookModel>? = null
+    private lateinit var bookModel: ArrayList<BookModel>
     private lateinit var binding: FragmentHomeBinding
-    private var bookAdapter: BookHomeAdapter? = null
+    private lateinit var bookAdapter: BookHomeAdapter
 
 
     override fun onCreateView(
@@ -32,7 +35,7 @@ class HomeFragment : Fragment(), BookHomeAdapter.Listener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater)
-        binding.homeRV.layoutManager = GridLayoutManager(context, 3)
+        binding.rvHome.layoutManager = GridLayoutManager(context, 3)
 //Adapterden checkbox
         val bind = ItemHomeBinding.inflate(LayoutInflater.from(context))
 
@@ -43,8 +46,25 @@ class HomeFragment : Fragment(), BookHomeAdapter.Listener {
 
             }
         }
-//<-
+
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                try {
+                    bookAdapter.filter.filter(s)
+                }
+                catch (e: Exception){
+
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+        })
         loadData()
+
         return binding.root
     }
 
@@ -72,7 +92,7 @@ class HomeFragment : Fragment(), BookHomeAdapter.Listener {
                         bookModel = ArrayList(it)
                         bookModel?.let {
                             bookAdapter = BookHomeAdapter(it)
-                            binding.homeRV.adapter = bookAdapter
+                            binding.rvHome.adapter = bookAdapter
                         }
                     }
                 }

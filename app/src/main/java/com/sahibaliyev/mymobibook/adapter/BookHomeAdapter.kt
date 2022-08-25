@@ -3,15 +3,21 @@ package com.sahibaliyev.mymobibook.adapter
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.sahibaliyev.mymobibook.activity.BookAboutActivity
 import com.sahibaliyev.mymobibook.databinding.ItemHomeBinding
 import com.sahibaliyev.mymobibook.model.BookModel
+import com.sahibaliyev.mymobibook.model.FilterHome
 import com.squareup.picasso.Picasso
 
-class BookHomeAdapter(private val bookList: ArrayList<BookModel>) : RecyclerView.Adapter<BookHomeAdapter.BookHolder>() {
+class BookHomeAdapter(var bookList: ArrayList<BookModel>) : RecyclerView.Adapter<BookHomeAdapter.BookHolder>() ,
+    Filterable {
 
 
+
+    private var filter: FilterHome? = null
 
     class BookHolder(val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -49,6 +55,15 @@ class BookHomeAdapter(private val bookList: ArrayList<BookModel>) : RecyclerView
 
     }
 
+     override fun getFilter(): Filter {
+
+        if (filter == null) {
+
+            filter = FilterHome(bookList, this)
+
+        }
+        return filter as FilterHome
+    }
 
     override fun getItemCount(): Int {
         return bookList.count()

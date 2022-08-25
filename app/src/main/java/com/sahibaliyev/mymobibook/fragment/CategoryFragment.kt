@@ -1,6 +1,8 @@
 package com.sahibaliyev.mymobibook.fragment
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,13 +21,14 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.Exception
 
 class CategoryFragment : Fragment() {
 
     private val BASE_URL = "https://raw.githubusercontent.com/"
-    private var bookModel: ArrayList<BookModel>? = null
+    private lateinit var bookModel: ArrayList<BookModel>
     private lateinit var binding: FragmentCategoryBinding
-    private var bookAdapter: BookCategoryAdapter? = null
+    private lateinit var bookAdapter: BookCategoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +38,24 @@ class CategoryFragment : Fragment() {
         binding = FragmentCategoryBinding.inflate(layoutInflater)
         binding.rvCategory.layoutManager = LinearLayoutManager(context)
 
+        loadData()
+
+        binding.etSearchCategory.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                try {
+                    bookAdapter.filter.filter(s)
+                }
+                catch (e: Exception){
+
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+        })
         loadData()
 
 

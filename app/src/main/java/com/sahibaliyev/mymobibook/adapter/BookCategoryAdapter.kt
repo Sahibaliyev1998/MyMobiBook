@@ -3,21 +3,21 @@ package com.sahibaliyev.mymobibook.adapter
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
-import com.sahibaliyev.mymobibook.activity.BookAboutActivity
 import com.sahibaliyev.mymobibook.activity.BooksInCategoryActivity
 import com.sahibaliyev.mymobibook.databinding.ItemCategoryBinding
-import com.sahibaliyev.mymobibook.databinding.ItemHomeBinding
 import com.sahibaliyev.mymobibook.model.BookModel
-import com.squareup.picasso.Picasso
+import com.sahibaliyev.mymobibook.model.FilterHome
+import com.sahibaliyev.mymobibook.model.FilterCategory
 
-class BookCategoryAdapter(private val categoryList: ArrayList<BookModel>) : RecyclerView.Adapter<BookCategoryAdapter.BookHolder>() {
+class BookCategoryAdapter(var categoryList: ArrayList<BookModel>) : RecyclerView.Adapter<BookCategoryAdapter.BookHolder>() ,
+    Filterable {
 
-
+    private var filter: FilterCategory? = null
 
     class BookHolder(val binding: ItemCategoryBinding) : RecyclerView.ViewHolder(binding.root)
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookHolder {
 
@@ -38,6 +38,7 @@ class BookCategoryAdapter(private val categoryList: ArrayList<BookModel>) : Recy
 
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView.context, BooksInCategoryActivity::class.java)
+
             intent.putExtra("book",categoryList.get(position))
                // .putExtra("image" ,categoryList.get(position).image)
                // .putExtra("name" , categoryList.get(position).name)
@@ -47,8 +48,17 @@ class BookCategoryAdapter(private val categoryList: ArrayList<BookModel>) : Recy
         }
 
     }
-
     override fun getItemCount(): Int {
         return categoryList.count()
+    }
+
+    override fun getFilter(): Filter {
+
+        if (filter == null) {
+
+            filter = FilterCategory(categoryList, this)
+
+        }
+        return filter as FilterCategory
     }
 }
