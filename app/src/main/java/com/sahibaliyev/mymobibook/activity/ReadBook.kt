@@ -55,7 +55,9 @@ class ReadBook : AppCompatActivity() {
                 Toast.makeText(this, "PDF Download Successful", Toast.LENGTH_SHORT).show()
                 try {
 
-                    bin.pdfView.fromFile(viewModel.getPdfFileUri()).load()
+                    bin.pdfView.fromFile(viewModel.getPdfFileUri())
+                        .enableDoubletap(true)
+                        .load()
 
                 } catch (e: IOException) {
                     Toast.makeText(this, "Failed Download", Toast.LENGTH_SHORT).show()
