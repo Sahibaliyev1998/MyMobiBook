@@ -49,6 +49,7 @@ class BookHomeAdapter(private val bookList: ArrayList<BookModel>) : RecyclerView
 
     }
 
+
     override fun getItemCount(): Int {
         return bookList.count()
     }
