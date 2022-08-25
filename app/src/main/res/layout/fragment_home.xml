@@ -17,15 +17,14 @@
         android:layout_marginEnd="10dp"
         android:background="@drawable/shape_edittext"
         android:drawableStart="@drawable/ic_search"
-        android:hint="Search"
+        android:hint="@string/search"
         android:inputType="text"
         android:padding="10dp"
         android:textColorHint="#CCCCCC"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TouchTargetSizeCheck"
-        />
+        tools:ignore="TouchTargetSizeCheck" />
 
 
     <androidx.recyclerview.widget.RecyclerView

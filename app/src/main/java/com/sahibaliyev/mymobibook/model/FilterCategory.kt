@@ -1,8 +1,8 @@
 package com.sahibaliyev.mymobibook.model
+
 import android.annotation.SuppressLint
 import android.widget.Filter
 import com.sahibaliyev.mymobibook.adapter.BookCategoryAdapter
-import com.sahibaliyev.mymobibook.adapter.BookHomeAdapter
 
 class FilterCategory(
     private var filterList: ArrayList<BookModel>,
@@ -10,25 +10,24 @@ class FilterCategory(
 ) : Filter() {
 
     @SuppressLint("DefaultLocale")
-    override fun performFiltering(constraint : CharSequence?): FilterResults {
+    override fun performFiltering(constraint: CharSequence?): FilterResults {
         var constraint = constraint
         val result = FilterResults()
 
-        if (constraint != null && constraint.isNotEmpty()){
+        if (constraint != null && constraint.isNotEmpty()) {
 
             constraint = constraint.toString().uppercase()
 
-            val filteredModel : ArrayList<BookModel> = ArrayList()
-            for (i in 0 until filterList.size){
-               if (filterList[i].category.uppercase().contains(constraint)){
+            val filteredModel: ArrayList<BookModel> = ArrayList()
+            for (i in 0 until filterList.size) {
+                if (filterList[i].category.uppercase().contains(constraint)) {
 
                     filteredModel.add(filterList[i])
                 }
             }
             result.values = filteredModel
             result.count = filteredModel.size
-        }
-        else{
+        } else {
             result.count = filterList.size
             result.values = filterList
         }
@@ -37,7 +36,7 @@ class FilterCategory(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun publishResults(constraint: CharSequence?, result : FilterResults) {
+    override fun publishResults(constraint: CharSequence?, result: FilterResults) {
 
 
         adapterCategory.categoryList = result.values as ArrayList<BookModel>

@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sahibaliyev.mymobibook.activity.BooksInCategoryActivity
 import com.sahibaliyev.mymobibook.databinding.ItemCategoryBinding
 import com.sahibaliyev.mymobibook.model.BookModel
-import com.sahibaliyev.mymobibook.model.FilterHome
 import com.sahibaliyev.mymobibook.model.FilterCategory
 
-class BookCategoryAdapter(var categoryList: ArrayList<BookModel>) : RecyclerView.Adapter<BookCategoryAdapter.BookHolder>() ,
+class BookCategoryAdapter(var categoryList: ArrayList<BookModel>) :
+    RecyclerView.Adapter<BookCategoryAdapter.BookHolder>(),
     Filterable {
 
     private var filter: FilterCategory? = null
@@ -21,7 +21,8 @@ class BookCategoryAdapter(var categoryList: ArrayList<BookModel>) : RecyclerView
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookHolder {
 
-        val binding = ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent,false)
+        val binding =
+            ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return BookHolder(binding)
     }
 
@@ -39,15 +40,16 @@ class BookCategoryAdapter(var categoryList: ArrayList<BookModel>) : RecyclerView
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView.context, BooksInCategoryActivity::class.java)
 
-            intent.putExtra("book",categoryList.get(position))
-               // .putExtra("image" ,categoryList.get(position).image)
-               // .putExtra("name" , categoryList.get(position).name)
-               // .putExtra("description" , categoryList.get(position).description)
-               // .putExtra("category" , categoryList.get(position).category)
+            intent.putExtra("book", categoryList.get(position))
+            // .putExtra("image" ,categoryList.get(position).image)
+            // .putExtra("name" , categoryList.get(position).name)
+            // .putExtra("description" , categoryList.get(position).description)
+            // .putExtra("category" , categoryList.get(position).category)
             holder.itemView.context.startActivity(intent)
         }
 
     }
+
     override fun getItemCount(): Int {
         return categoryList.count()
     }

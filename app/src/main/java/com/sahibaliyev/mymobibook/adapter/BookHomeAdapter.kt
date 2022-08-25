@@ -12,9 +12,9 @@ import com.sahibaliyev.mymobibook.model.BookModel
 import com.sahibaliyev.mymobibook.model.FilterHome
 import com.squareup.picasso.Picasso
 
-class BookHomeAdapter(var bookList: ArrayList<BookModel>) : RecyclerView.Adapter<BookHomeAdapter.BookHolder>() ,
+class BookHomeAdapter(var bookList: ArrayList<BookModel>) :
+    RecyclerView.Adapter<BookHomeAdapter.BookHolder>(),
     Filterable {
-
 
 
     private var filter: FilterHome? = null
@@ -22,12 +22,13 @@ class BookHomeAdapter(var bookList: ArrayList<BookModel>) : RecyclerView.Adapter
     class BookHolder(val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root)
 
 
-    interface Listener{
+    interface Listener {
         fun onItemClick(bookModel: BookModel)
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookHolder {
 
-        val binding = ItemHomeBinding.inflate(LayoutInflater.from(parent.context), parent,false)
+        val binding = ItemHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return BookHolder(binding)
     }
 
@@ -55,7 +56,7 @@ class BookHomeAdapter(var bookList: ArrayList<BookModel>) : RecyclerView.Adapter
 
     }
 
-     override fun getFilter(): Filter {
+    override fun getFilter(): Filter {
 
         if (filter == null) {
 
