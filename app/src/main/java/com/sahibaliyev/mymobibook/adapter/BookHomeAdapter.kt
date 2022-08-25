@@ -54,6 +54,7 @@ class BookHomeAdapter(var bookList: ArrayList<BookModel>) :
             holder.itemView.context.startActivity(intent)
         }
 
+
     }
 
     override fun getFilter(): Filter {
