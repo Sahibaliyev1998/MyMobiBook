@@ -12,11 +12,10 @@ interface BookAPI {
     //https://raw.githubusercontent.com/Bysako/JSONVeriMobiBook/main/book.json
 
     @GET("Bysako/JSONVeriMobiBook/main/book.json")
-
     fun getData() :Call<List<BookModel>>
-
-
 
     @GET
     fun downloadPdfFile(@Url pdfUrl: String) :Call<ResponseBody>
+
+
 }

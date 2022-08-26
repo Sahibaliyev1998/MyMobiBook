@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.room.Room
 import com.sahibaliyev.mymobibook.databinding.FragmentFavoriteBinding
+import com.sahibaliyev.mymobibook.model.FavoriteModel
+import com.sahibaliyev.mymobibook.util.AppDatabase
 
 class FavoriteFragment : Fragment() {
 
@@ -21,10 +24,24 @@ class FavoriteFragment : Fragment() {
         binding.rvFavorite.layoutManager = GridLayoutManager(context, 3)
 
 
+        val db = context?.let {
+            Room.databaseBuilder(
+                it.applicationContext,
+                AppDatabase::class.java, "database-name"
+            ).build()
+        }
 
 
+        val favDao = db?.favoriteDao()
+        val fav: List<FavoriteModel> = favDao!!.getAll()
+
+        favData()
         return binding.root
     }
 
+    fun favData(){
+
+
+    }
 
 }

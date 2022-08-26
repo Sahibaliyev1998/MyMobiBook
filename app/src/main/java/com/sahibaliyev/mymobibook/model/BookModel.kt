@@ -2,7 +2,7 @@ package com.sahibaliyev.mymobibook.model
 
 import java.io.Serializable
 
-data class BookModel (val id: String,
+data class BookModel (val id: Int,
                       val name: String,
                       val author: String,
                       val image: String,

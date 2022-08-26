@@ -8,11 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.room.Room
 import com.sahibaliyev.mymobibook.adapter.BookHomeAdapter
 import com.sahibaliyev.mymobibook.databinding.FragmentHomeBinding
 import com.sahibaliyev.mymobibook.databinding.ItemHomeBinding
 import com.sahibaliyev.mymobibook.model.BookModel
+import com.sahibaliyev.mymobibook.model.FavoriteModel
 import com.sahibaliyev.mymobibook.service.BookAPI
+import com.sahibaliyev.mymobibook.util.AppDatabase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,19 +35,13 @@ class HomeFragment : Fragment(), BookHomeAdapter.Listener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         binding.rvHome.layoutManager = GridLayoutManager(context, 3)
 //Adapterden checkbox
         val bind = ItemHomeBinding.inflate(LayoutInflater.from(context))
 
-        bind.cbFavorit.setOnCheckedChangeListener { checkBox, isChecked ->
-            if (isChecked) {
 
-            } else {
-
-            }
-        }
 
         binding.etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -63,12 +60,22 @@ class HomeFragment : Fragment(), BookHomeAdapter.Listener {
             }
         })
         loadData()
+        val db = context?.let {
+            Room.databaseBuilder(
+                it.applicationContext,
+                AppDatabase::class.java, "database-name"
+            ).build()
+        }
+
+
+        val favDao = db?.favoriteDao()
+        val fav: List<FavoriteModel> = favDao!!.getAll()
 
         return binding.root
     }
 
 
-    fun loadData() {
+    private fun loadData() {
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())

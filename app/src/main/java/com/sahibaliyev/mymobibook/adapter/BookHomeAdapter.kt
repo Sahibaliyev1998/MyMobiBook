@@ -10,6 +10,7 @@ import com.sahibaliyev.mymobibook.activity.BookAboutActivity
 import com.sahibaliyev.mymobibook.databinding.ItemHomeBinding
 import com.sahibaliyev.mymobibook.model.BookModel
 import com.sahibaliyev.mymobibook.model.FilterHome
+import com.sahibaliyev.mymobibook.util.Common
 import com.squareup.picasso.Picasso
 
 class BookHomeAdapter(var bookList: ArrayList<BookModel>) :
@@ -53,6 +54,7 @@ class BookHomeAdapter(var bookList: ArrayList<BookModel>) :
                 .putExtra("pdf", bookList.get(position).pdf)
             holder.itemView.context.startActivity(intent)
         }
+
 
 
     }
