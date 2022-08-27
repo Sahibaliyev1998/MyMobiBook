@@ -13,7 +13,7 @@ import com.sahibaliyev.mymobibook.adapter.BookHomeAdapter
 import com.sahibaliyev.mymobibook.databinding.FragmentHomeBinding
 import com.sahibaliyev.mymobibook.databinding.ItemHomeBinding
 import com.sahibaliyev.mymobibook.model.BookModel
-import com.sahibaliyev.mymobibook.model.FavoriteModel
+import com.sahibaliyev.mymobibook.model.FavoriteEntity
 import com.sahibaliyev.mymobibook.service.BookAPI
 import com.sahibaliyev.mymobibook.util.AppDatabase
 import retrofit2.Call
@@ -29,6 +29,7 @@ class HomeFragment : Fragment(), BookHomeAdapter.Listener {
     private lateinit var bookModel: ArrayList<BookModel>
     private lateinit var binding: FragmentHomeBinding
     private lateinit var bookAdapter: BookHomeAdapter
+    private lateinit var appDatabase: AppDatabase
 
 
     override fun onCreateView(
@@ -60,20 +61,31 @@ class HomeFragment : Fragment(), BookHomeAdapter.Listener {
             }
         })
         loadData()
-        val db = context?.let {
-            Room.databaseBuilder(
-                it.applicationContext,
-                AppDatabase::class.java, "database-name"
-            ).build()
+
+
+
+        bind.cbFavorit.setOnCheckedChangeListener { buttonView, isChecked ->
+            appdata()
         }
 
 
-        val favDao = db?.favoriteDao()
-        val fav: List<FavoriteModel> = favDao!!.getAll()
+
+
 
         return binding.root
     }
 
+    fun appdata(){
+
+        val fav = FavoriteEntity()
+        fav.id
+
+        appDatabase= context?.let { AppDatabase.getAppDatabase(it) }!!
+        appDatabase.favoriteDao().insertAll(fav)
+
+
+
+    }
 
     private fun loadData() {
         val retrofit: Retrofit = Retrofit.Builder()
