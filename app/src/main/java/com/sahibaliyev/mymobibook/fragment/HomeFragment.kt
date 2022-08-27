@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.room.Room
 import com.sahibaliyev.mymobibook.adapter.BookHomeAdapter
 import com.sahibaliyev.mymobibook.databinding.FragmentHomeBinding
 import com.sahibaliyev.mymobibook.databinding.ItemHomeBinding
@@ -75,14 +74,13 @@ class HomeFragment : Fragment(), BookHomeAdapter.Listener {
         return binding.root
     }
 
-    fun appdata(){
+    fun appdata() {
 
         val fav = FavoriteEntity()
         fav.id
 
-        appDatabase= context?.let { AppDatabase.getAppDatabase(it) }!!
+        appDatabase = context?.let { AppDatabase.getAppDatabase(it) }!!
         appDatabase.favoriteDao().insertAll(fav)
-
 
 
     }

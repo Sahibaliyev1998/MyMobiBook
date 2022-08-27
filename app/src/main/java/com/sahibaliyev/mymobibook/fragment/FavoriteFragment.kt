@@ -24,13 +24,11 @@ class FavoriteFragment : Fragment() {
         binding.rvFavorite.layoutManager = GridLayoutManager(context, 3)
 
 
-
-
         //favData()
         return binding.root
     }
 
-    fun favData(){
+    fun favData() {
 
         val db = context?.let {
             Room.databaseBuilder(
