@@ -21,8 +21,6 @@ class FavoriteFragment : Fragment() {
         binding.rvFavorite.layoutManager = GridLayoutManager(context, 3)
 
 
-
-
         return binding.root
     }
 
