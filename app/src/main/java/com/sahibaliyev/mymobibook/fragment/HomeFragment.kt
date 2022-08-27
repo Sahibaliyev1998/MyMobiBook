@@ -38,13 +38,7 @@ class HomeFragment : Fragment(), BookHomeAdapter.Listener {
 //Adapterden checkbox
         val bind = ItemHomeBinding.inflate(LayoutInflater.from(context))
 
-        bind.cbFavorit.setOnCheckedChangeListener { checkBox, isChecked ->
-            if (isChecked) {
 
-            } else {
-
-            }
-        }
 
         binding.etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
