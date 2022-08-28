@@ -7,28 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.get
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sahibaliyev.mymobibook.MVVM.HomeFragmentMVVM
 import com.sahibaliyev.mymobibook.adapter.BookHomeAdapter
 import com.sahibaliyev.mymobibook.databinding.FragmentHomeBinding
-import com.sahibaliyev.mymobibook.databinding.ItemHomeBinding
 import com.sahibaliyev.mymobibook.model.BookModel
-import com.sahibaliyev.mymobibook.model.FavoriteEntity
 import com.sahibaliyev.mymobibook.service.BookAPI
-import com.sahibaliyev.mymobibook.util.AppDatabase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import kotlin.coroutines.CoroutineContext
 
 class HomeFragment : Fragment(), BookHomeAdapter.Listener {
 
@@ -37,8 +27,9 @@ class HomeFragment : Fragment(), BookHomeAdapter.Listener {
     private lateinit var bookModel: ArrayList<BookModel>
     private lateinit var binding: FragmentHomeBinding
     private lateinit var bookAdapter: BookHomeAdapter
-   // private lateinit var appDatabase: AppDatabase
-    private lateinit var viewModel : HomeFragmentMVVM
+
+    // private lateinit var appDatabase: AppDatabase
+    private lateinit var viewModel: HomeFragmentMVVM
 
 
     override fun onCreateView(
@@ -57,21 +48,22 @@ class HomeFragment : Fragment(), BookHomeAdapter.Listener {
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 try {
                     bookAdapter.filter.filter(s)
-                } catch (e: Exception) {}
+                } catch (e: Exception) {
+                }
             }
+
             override fun afterTextChanged(p0: Editable?) {}
         })
 
 
-
-       /* bind.cbFavorit.setOnCheckedChangeListener { buttonView, isChecked ->
-            appdata()
-        }*/
-
+        /* bind.cbFavorit.setOnCheckedChangeListener { buttonView, isChecked ->
+             appdata()
+         }*/
 
 
 
-loadData()
+
+        loadData()
 
 
         return binding.root
@@ -113,9 +105,9 @@ loadData()
 
     override fun onItemClick(bookModel: BookModel) {}
 
-    override fun onViewCreated(view: View , savedInstanceState: Bundle?){
-        super.onViewCreated(view , savedInstanceState)
-        viewModel= ViewModelProviders.of(this)[HomeFragmentMVVM::class.java]
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProviders.of(this)[HomeFragmentMVVM::class.java]
 
 
     }

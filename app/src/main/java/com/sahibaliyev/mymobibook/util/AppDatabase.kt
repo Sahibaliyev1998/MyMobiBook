@@ -16,32 +16,33 @@ abstract class AppDatabase : RoomDatabase() {
 //Singleton
 
     companion object {
-        @Volatile private var INSTANCE: AppDatabase? = null
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
 
-       /** fun getAppDatabase(context: Context): AppDatabase? {
-            if (INSTANCE == null) {
-                INSTANCE = Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
-                    "favorite-database"
-                )
-                    .allowMainThreadQueries()
-                    .build()
-            }return INSTANCE
-            }
-       fun destroyInstance() {
-            INSTANCE = null
-       }*/
+        /** fun getAppDatabase(context: Context): AppDatabase? {
+        if (INSTANCE == null) {
+        INSTANCE = Room.databaseBuilder(
+        context.applicationContext,
+        AppDatabase::class.java,
+        "favorite-database"
+        )
+        .allowMainThreadQueries()
+        .build()
+        }return INSTANCE
+        }
+        fun destroyInstance() {
+        INSTANCE = null
+        }*/
 
-       private val lock = Any()
-        operator fun invoke (context: Context)= INSTANCE ?: synchronized(lock){
+        private val lock = Any()
+        operator fun invoke(context: Context) = INSTANCE ?: synchronized(lock) {
             INSTANCE ?: getAppDatabase(context).also {
                 INSTANCE = it
             }
         }
 
         private fun getAppDatabase(context: Context) = Room.databaseBuilder(
-            context.applicationContext ,
+            context.applicationContext,
             AppDatabase::class.java,
             "bookfavoritedatabase"
         ).build()
