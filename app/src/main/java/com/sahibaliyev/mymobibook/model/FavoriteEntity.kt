@@ -12,7 +12,7 @@ class FavoriteEntity {
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: String? = null
+    val id: Int? = null
 
     @ColumnInfo(name = "name")
     val name: String? = null

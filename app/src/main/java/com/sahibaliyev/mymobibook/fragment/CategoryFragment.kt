@@ -7,7 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sahibaliyev.mymobibook.MVVM.CategoryFragmentMVVM
+import com.sahibaliyev.mymobibook.MVVM.HomeFragmentMVVM
+import com.sahibaliyev.mymobibook.R
 import com.sahibaliyev.mymobibook.adapter.BookCategoryAdapter
 import com.sahibaliyev.mymobibook.databinding.FragmentCategoryBinding
 import com.sahibaliyev.mymobibook.model.BookModel
@@ -24,6 +28,7 @@ class CategoryFragment : Fragment() {
     private lateinit var bookModel: ArrayList<BookModel>
     private lateinit var binding: FragmentCategoryBinding
     private lateinit var bookAdapter: BookCategoryAdapter
+    private lateinit var viewModel : CategoryFragmentMVVM
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +38,7 @@ class CategoryFragment : Fragment() {
         binding = FragmentCategoryBinding.inflate(layoutInflater)
         binding.rvCategory.layoutManager = LinearLayoutManager(context)
 
-        loadData()
+
 
         binding.etSearchCategory.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -57,6 +62,8 @@ class CategoryFragment : Fragment() {
 
         return binding.root
     }
+
+
 
     fun loadData() {
         val retrofit: Retrofit = Retrofit.Builder()
@@ -89,6 +96,12 @@ class CategoryFragment : Fragment() {
         })
     }
 
+    override fun onViewCreated(view: View , savedInstanceState: Bundle?){
+        super.onViewCreated(view , savedInstanceState)
+        viewModel= ViewModelProviders.of(this)[CategoryFragmentMVVM::class.java]
+
+
+    }
 
 
 }

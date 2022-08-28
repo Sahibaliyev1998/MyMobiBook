@@ -1,8 +1,10 @@
 package com.sahibaliyev.mymobibook.activity
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.util.AttributeSet
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -22,6 +24,7 @@ class ReadBook : AppCompatActivity() {
 
 
     private var bookId = ""
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,5 +72,7 @@ class ReadBook : AppCompatActivity() {
 
         intent.getStringExtra("pdf")?.let { viewModel.downloadPdfFile(it) }
     }
+
+
 
 }

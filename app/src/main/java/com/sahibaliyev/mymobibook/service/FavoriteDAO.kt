@@ -10,21 +10,19 @@ import com.sahibaliyev.mymobibook.model.FavoriteEntity
 interface FavoriteDAO {
 
     @Query("SELECT * FROM favorite")
-    fun getAll(): List<FavoriteEntity>
+    suspend fun getAll(): List<FavoriteEntity>
 
     @Query("SELECT * FROM Favorite WHERE id IN (:favoriteIds)")
-    fun loadAllByIds(favoriteIds: IntArray): List<FavoriteEntity>
+    suspend fun loadAllByIds(favoriteIds: IntArray): List<FavoriteEntity>
 
-    @Query(
-        "SELECT * FROM favorite WHERE name LIKE :name AND " +
-                "author LIKE :author LIMIT 1"
-    )
-    fun findByName(name: String, author: String): FavoriteEntity
+    @Query("SELECT * FROM favorite WHERE name LIKE :name AND " +
+                "author LIKE :author LIMIT 1")
+    suspend fun findByName(name: String, author: String): FavoriteEntity
 
 
     @Insert
-    fun insertAll(favorite: FavoriteEntity)
+    suspend fun insertAll(vararg favorite: FavoriteEntity) : List<Long>
 
     @Delete
-    fun delete(favorite: FavoriteEntity)
+    suspend fun delete(favorite: FavoriteEntity)
 }

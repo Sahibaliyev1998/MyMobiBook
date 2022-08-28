@@ -12,9 +12,13 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun favoriteDao(): FavoriteDAO
 
+
+//Singleton
+
     companion object {
-        private var INSTANCE: AppDatabase? = null
-        fun getAppDatabase(context: Context): AppDatabase? {
+        @Volatile private var INSTANCE: AppDatabase? = null
+
+       /** fun getAppDatabase(context: Context): AppDatabase? {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(
                     context.applicationContext,
@@ -23,12 +27,23 @@ abstract class AppDatabase : RoomDatabase() {
                 )
                     .allowMainThreadQueries()
                     .build()
+            }return INSTANCE
             }
-            return INSTANCE
+       fun destroyInstance() {
+            INSTANCE = null
+       }*/
+
+       private val lock = Any()
+        operator fun invoke (context: Context)= INSTANCE ?: synchronized(lock){
+            INSTANCE ?: getAppDatabase(context).also {
+                INSTANCE = it
+            }
         }
 
-        fun destroyInstance() {
-            INSTANCE = null
-        }
+        private fun getAppDatabase(context: Context) = Room.databaseBuilder(
+            context.applicationContext ,
+            AppDatabase::class.java,
+            "bookfavoritedatabase"
+        ).build()
     }
 }
