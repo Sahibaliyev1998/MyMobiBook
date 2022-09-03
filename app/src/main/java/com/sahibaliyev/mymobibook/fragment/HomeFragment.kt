@@ -3,6 +3,7 @@ package com.sahibaliyev.mymobibook.fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,18 +14,10 @@ import com.sahibaliyev.mymobibook.MVVM.HomeFragmentMVVM
 import com.sahibaliyev.mymobibook.adapter.BookHomeAdapter
 import com.sahibaliyev.mymobibook.databinding.FragmentHomeBinding
 import com.sahibaliyev.mymobibook.model.BookModel
-import com.sahibaliyev.mymobibook.service.BookAPI
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class HomeFragment : Fragment(), BookHomeAdapter.Listener {
 
 
-    private val BASE_URL = "https://raw.githubusercontent.com/"
-    private lateinit var bookModel: ArrayList<BookModel>
     private lateinit var binding: FragmentHomeBinding
     private lateinit var bookAdapter: BookHomeAdapter
 
@@ -37,10 +30,13 @@ class HomeFragment : Fragment(), BookHomeAdapter.Listener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
+        binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         binding.rvHome.layoutManager = GridLayoutManager(context, 3)
-//Adapterden checkbox
 
+        viewModel = ViewModelProviders.of(this)[HomeFragmentMVVM::class.java]
+
+
+        //Adapterden checkbox
         //val bind = ItemHomeBinding.inflate(LayoutInflater.from(context))
 
         binding.etSearch.addTextChangedListener(object : TextWatcher {
@@ -56,50 +52,16 @@ class HomeFragment : Fragment(), BookHomeAdapter.Listener {
         })
 
 
-        /* bind.cbFavorit.setOnCheckedChangeListener { buttonView, isChecked ->
-             appdata()
-         }*/
-
-
-
-
-        loadData()
-
 
         return binding.root
     }
 
-
-    fun loadData() {
-
-        val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val service: BookAPI = retrofit.create(BookAPI::class.java)
-
-        val call: Call<List<BookModel>> = service.getData()
-
-        call.enqueue(object : Callback<List<BookModel>> {
-            override fun onFailure(call: Call<List<BookModel>>, t: Throwable) {
-                t.printStackTrace()
-            }
-            override fun onResponse(
-                call: Call<List<BookModel>>,
-                response: Response<List<BookModel>>
-            ) {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        bookModel = ArrayList(it)
-                        bookModel.let {
-                            bookAdapter = BookHomeAdapter(it)
-                            binding.rvHome.adapter = bookAdapter
-                        }
-                    }
-                }
-            }
-        })
+    fun observeData() {
+        viewModel.bookLiveData.observe(viewLifecycleOwner) {
+            Log.d("MyTagHere", "observeData: ${it.size}")
+            bookAdapter = BookHomeAdapter(it)
+            binding.rvHome.adapter = bookAdapter
+        }
     }
 
 
@@ -109,6 +71,9 @@ class HomeFragment : Fragment(), BookHomeAdapter.Listener {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this)[HomeFragmentMVVM::class.java]
 
+
+        viewModel.loadData()
+        observeData()
 
     }
 }

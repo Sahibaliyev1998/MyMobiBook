@@ -21,6 +21,9 @@ interface FavoriteDAO {
     )
     suspend fun findByName(name: String, author: String): FavoriteEntity
 
+    @Query("DELETE FROM favorite")
+    suspend fun deleteAllFavorite()
+
 
     @Insert
     suspend fun insertAll(vararg favorite: FavoriteEntity): List<Long>
