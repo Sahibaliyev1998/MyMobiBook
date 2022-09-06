@@ -18,6 +18,7 @@ class RetrofitInstance {
                 .baseUrl("https://raw.githubusercontent.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
+
         }
     }
 }
