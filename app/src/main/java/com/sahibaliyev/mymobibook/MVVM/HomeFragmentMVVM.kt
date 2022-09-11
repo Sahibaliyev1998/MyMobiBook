@@ -1,6 +1,7 @@
 package com.sahibaliyev.mymobibook.MVVM
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.sahibaliyev.mymobibook.model.BookModel
 import com.sahibaliyev.mymobibook.model.FavoriteEntity
@@ -14,10 +15,7 @@ import retrofit2.Response
 
 class HomeFragmentMVVM(application: Application) : BaseMVVM(application) {
     val bookLiveData = MutableLiveData<ArrayList<BookModel>>()
-
-
-    private lateinit var bookModel: ArrayList<BookModel>
-
+    lateinit var bookModels: ArrayList<BookModel>
 
     fun dataSave(favoriteList: List<FavoriteEntity>) {
 
@@ -28,8 +26,23 @@ class HomeFragmentMVVM(application: Application) : BaseMVVM(application) {
         }
     }
 
-    fun loadData() {
+    fun saveBook(book: FavoriteEntity){
+        val dao = AppDatabase(getApplication()).favoriteDao()
+        launch(coroutineContext){
+            dao.insert(book)
+            Log.d("MyTagHere", "saveBook: ${dao.getAll().size}")
+        }
+    }
 
+    fun removeBook(book: FavoriteEntity){
+        val dao = AppDatabase(getApplication()).favoriteDao()
+        launch(coroutineContext){
+            dao.delete(book)
+            Log.d("MyTagHere", "saveBook: ${dao.getAll().size}")
+        }
+    }
+
+    fun loadData() {
 
         val retrofitInstance = RetrofitInstance.getRetrofitInstance()
         val service: BookAPI = retrofitInstance.create(BookAPI::class.java)
@@ -43,11 +56,10 @@ class HomeFragmentMVVM(application: Application) : BaseMVVM(application) {
                 call: Call<List<BookModel>>,
                 response: Response<List<BookModel>>
             ) {
-
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        bookModel = ArrayList(it)
-                        bookModel.let {
+                        bookModels = ArrayList(it)
+                        bookModels.let {
                             bookLiveData.postValue(it)
                         }
                     }

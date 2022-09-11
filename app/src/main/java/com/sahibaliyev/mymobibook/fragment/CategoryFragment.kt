@@ -28,7 +28,6 @@ class CategoryFragment : Fragment() {
         binding.rvCategory.layoutManager = LinearLayoutManager(context)
 
 
-
         binding.etSearchCategory.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -36,9 +35,7 @@ class CategoryFragment : Fragment() {
                     bookAdapter.filter.filter(s)
                 } catch (e: Exception) {
                 }
-            }
-
-            override fun afterTextChanged(p0: Editable?) {}
+            }override fun afterTextChanged(p0: Editable?) {}
         })
 
 

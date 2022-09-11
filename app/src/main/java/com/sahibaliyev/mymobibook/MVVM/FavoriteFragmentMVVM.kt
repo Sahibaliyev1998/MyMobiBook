@@ -1,5 +1,9 @@
 package com.sahibaliyev.mymobibook.MVVM
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
 
-class FavoriteFragmentMVVM : ViewModel()
+class FavoriteFragmentMVVM(application: Application) : BaseMVVM(application) {
+
+
+
+}

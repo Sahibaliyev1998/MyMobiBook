@@ -28,14 +28,8 @@ class BookCategoryAdapter(var categoryList: ArrayList<BookModel>) :
 
     override fun onBindViewHolder(holder: BookHolder, position: Int ) {
 
-        //holder.binding.txtName.text = categoryList.get(position).name
-        holder.binding.txtCategoryItem.text = categoryList.get(position).category
 
-      /*  Picasso.get()
-            .load(categoryList[position].image)
-            .into(holder.binding.imgBook)*/
-
-
+        holder.binding.txtCategoryItem.text = categoryList.get(position).category.toString()
 
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView.context, BooksInCategoryActivity::class.java)

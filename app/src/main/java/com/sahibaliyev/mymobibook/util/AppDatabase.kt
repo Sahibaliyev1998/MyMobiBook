@@ -4,8 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.sahibaliyev.mymobibook.model.FavoriteEntity
 import com.sahibaliyev.mymobibook.service.FavoriteDAO
+import io.reactivex.annotations.NonNull
 
 @Database(entities = [FavoriteEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
@@ -41,10 +43,11 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
-        private fun getAppDatabase(context: Context) = Room.databaseBuilder(
+        fun getAppDatabase(context: Context) = Room.databaseBuilder(
             context.applicationContext,
             AppDatabase::class.java,
             "bookfavoritedatabase"
-        ).build()
+        ).allowMainThreadQueries().build()
+
     }
 }

@@ -20,7 +20,7 @@ class FilterCategory(
 
             val filteredModel: ArrayList<BookModel> = ArrayList()
             for (i in 0 until filterList.size) {
-                if (filterList[i].category.uppercase().contains(constraint)) {
+                if (filterList[i].category.toString().uppercase().contains(constraint)) {
 
                     filteredModel.add(filterList[i])
                 }

@@ -10,7 +10,7 @@ import com.sahibaliyev.mymobibook.model.FavoriteEntity
 interface FavoriteDAO {
 
     @Query("SELECT * FROM favorite")
-    suspend fun getAll(): List<FavoriteEntity>
+    fun getAll(): List<FavoriteEntity>
 
     @Query("SELECT * FROM Favorite WHERE id IN (:favoriteIds)")
     suspend fun loadAllByIds(favoriteIds: IntArray): List<FavoriteEntity>
@@ -24,9 +24,11 @@ interface FavoriteDAO {
     @Query("DELETE FROM favorite")
     suspend fun deleteAllFavorite()
 
+    @Insert
+    suspend fun insertAll(vararg favorite: FavoriteEntity)
 
     @Insert
-    suspend fun insertAll(vararg favorite: FavoriteEntity): List<Long>
+    suspend fun insert(favorite: FavoriteEntity)
 
     @Delete
     suspend fun delete(favorite: FavoriteEntity)

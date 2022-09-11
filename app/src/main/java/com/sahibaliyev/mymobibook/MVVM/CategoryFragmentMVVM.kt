@@ -17,14 +17,12 @@ class CategoryFragmentMVVM(application: Application) : BaseMVVM(application) {
 
         val retrofitInstance = RetrofitInstance.getRetrofitInstance()
         val service: BookAPI = retrofitInstance.create(BookAPI::class.java)
-
         val call: Call<List<BookModel>> = service.getData()
 
         call.enqueue(object : Callback<List<BookModel>> {
             override fun onFailure(call: Call<List<BookModel>>, t: Throwable) {
                 t.printStackTrace()
             }
-
             override fun onResponse(
                 call: Call<List<BookModel>>,
                 response: Response<List<BookModel>>
@@ -34,11 +32,12 @@ class CategoryFragmentMVVM(application: Application) : BaseMVVM(application) {
                         bookModel = ArrayList(it)
                         bookModel.let {
                             bookLiveData.postValue(it)
-
                         }
                     }
                 }
             }
         })
     }
+
+    
 }
