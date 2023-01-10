@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sahibaliyev.mymobibook.MVVM.CategoryFragmentMVVM
 import com.sahibaliyev.mymobibook.adapter.BookCategoryAdapter
 import com.sahibaliyev.mymobibook.databinding.FragmentCategoryBinding
+
 class CategoryFragment : Fragment() {
 
     private lateinit var binding: FragmentCategoryBinding
@@ -23,6 +24,7 @@ class CategoryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
 
         binding = FragmentCategoryBinding.inflate(layoutInflater)
         binding.rvCategory.layoutManager = LinearLayoutManager(context)

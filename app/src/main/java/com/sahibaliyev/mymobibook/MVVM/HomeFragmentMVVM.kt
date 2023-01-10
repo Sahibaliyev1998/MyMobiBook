@@ -4,7 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.sahibaliyev.mymobibook.model.BookModel
-import com.sahibaliyev.mymobibook.model.FavoriteEntity
+//import com.sahibaliyev.mymobibook.model.FavoriteEntity
 import com.sahibaliyev.mymobibook.other.RetrofitInstance
 import com.sahibaliyev.mymobibook.service.BookAPI
 import com.sahibaliyev.mymobibook.util.AppDatabase
@@ -17,26 +17,26 @@ class HomeFragmentMVVM(application: Application) : BaseMVVM(application) {
     val bookLiveData = MutableLiveData<ArrayList<BookModel>>()
     lateinit var bookModels: ArrayList<BookModel>
 
-    fun dataSave(favoriteList: List<FavoriteEntity>) {
+    /*fun dataSave(favoriteList: List<FavoriteEntity>) {
 
         launch {
             val dao = AppDatabase(getApplication()).favoriteDao()
             dao.deleteAllFavorite()
             dao.insertAll(*favoriteList.toTypedArray())
         }
-    }
+    }*/
 
-    fun saveBook(book: FavoriteEntity){
+    fun saveBook(book: BookModel) {
         val dao = AppDatabase(getApplication()).favoriteDao()
-        launch(coroutineContext){
+        launch(coroutineContext) {
             dao.insert(book)
             Log.d("MyTagHere", "saveBook: ${dao.getAll().size}")
         }
     }
 
-    fun removeBook(book: FavoriteEntity){
+    fun removeBook(book: BookModel) {
         val dao = AppDatabase(getApplication()).favoriteDao()
-        launch(coroutineContext){
+        launch(coroutineContext) {
             dao.delete(book)
             Log.d("MyTagHere", "saveBook: ${dao.getAll().size}")
         }

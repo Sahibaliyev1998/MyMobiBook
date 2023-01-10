@@ -1,35 +1,34 @@
 package com.sahibaliyev.mymobibook.service
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import com.sahibaliyev.mymobibook.model.FavoriteEntity
+import androidx.room.*
+import com.sahibaliyev.mymobibook.model.BookModel
 
 @Dao
 interface FavoriteDAO {
 
     @Query("SELECT * FROM favorite")
-    fun getAll(): List<FavoriteEntity>
+    fun getAll(): List<BookModel>
 
     @Query("SELECT * FROM Favorite WHERE id IN (:favoriteIds)")
-    suspend fun loadAllByIds(favoriteIds: IntArray): List<FavoriteEntity>
+    suspend fun loadAllByIds(favoriteIds: IntArray): List<BookModel>
 
     @Query(
         "SELECT * FROM favorite WHERE name LIKE :name AND " +
                 "author LIKE :author LIMIT 1"
     )
-    suspend fun findByName(name: String, author: String): FavoriteEntity
+    suspend fun findByName(name: String, author: String): BookModel
 
     @Query("DELETE FROM favorite")
     suspend fun deleteAllFavorite()
 
-    @Insert
-    suspend fun insertAll(vararg favorite: FavoriteEntity)
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
 
     @Insert
-    suspend fun insert(favorite: FavoriteEntity)
+    suspend fun insertAll(vararg favorite: BookModel)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(favorite: BookModel)
 
     @Delete
-    suspend fun delete(favorite: FavoriteEntity)
+    suspend fun delete(favorite: BookModel)
 }

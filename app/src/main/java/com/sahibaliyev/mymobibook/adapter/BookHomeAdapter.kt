@@ -2,31 +2,25 @@ package com.sahibaliyev.mymobibook.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.Filter
 import android.widget.Filterable
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
 import com.sahibaliyev.mymobibook.activity.BookAboutActivity
 import com.sahibaliyev.mymobibook.databinding.ItemHomeBinding
 import com.sahibaliyev.mymobibook.model.BookModel
-import com.sahibaliyev.mymobibook.model.FavoriteEntity
+//import com.sahibaliyev.mymobibook.model.FavoriteEntity
 import com.sahibaliyev.mymobibook.model.FilterHome
-import com.sahibaliyev.mymobibook.service.FavoriteDAO
-import com.sahibaliyev.mymobibook.util.AppDatabase
 import com.squareup.picasso.Picasso
 
-class BookHomeAdapter(var bookList: ArrayList<BookModel>, var itemSelectedListener: OnItemSelected) :
+class BookHomeAdapter(var bookList: ArrayList<BookModel>, var onSelected: (Int, Boolean) -> Unit) :
     RecyclerView.Adapter<BookHomeAdapter.BookHolder>(),
     Filterable {
 
 
     private var filter: FilterHome? = null
 
-    class BookHolder(val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class BookHolder(val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root)
 
 
     interface Listener {
@@ -41,11 +35,11 @@ class BookHomeAdapter(var bookList: ArrayList<BookModel>, var itemSelectedListen
 
     override fun onBindViewHolder(holder: BookHolder, position: Int ) {
 
-        holder.binding.txtName.text = bookList.get(position).name
-        holder.binding.txtAuthor.text = bookList.get(position).author
+        holder.binding.txtName.text = bookList[position].name
+        holder.binding.txtAuthor.text = bookList[position].author
 
         holder.binding.cbFavorit.setOnCheckedChangeListener { _, isChecked ->
-            itemSelectedListener.onItemSelected(position, isChecked)
+            onSelected(position, isChecked)
         }
 
         Picasso.get()

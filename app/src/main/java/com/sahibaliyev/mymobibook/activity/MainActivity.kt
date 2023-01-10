@@ -8,7 +8,7 @@ import com.sahibaliyev.mymobibook.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    //
+    //REGEXLER  [a-z]+@[a-z]{3,6}\.com gmail yoxlamaq ucun
     private lateinit var  binding: ActivityMainBinding
 
     @RequiresApi(Build.VERSION_CODES.R)

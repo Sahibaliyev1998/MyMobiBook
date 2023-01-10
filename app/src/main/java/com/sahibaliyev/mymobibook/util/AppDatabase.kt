@@ -1,15 +1,14 @@
 package com.sahibaliyev.mymobibook.util
 
+//import com.sahibaliyev.mymobibook.model.FavoriteEntity
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.sahibaliyev.mymobibook.model.FavoriteEntity
+import com.sahibaliyev.mymobibook.model.BookModel
 import com.sahibaliyev.mymobibook.service.FavoriteDAO
-import io.reactivex.annotations.NonNull
 
-@Database(entities = [FavoriteEntity::class], version = 1)
+@Database(entities = [BookModel::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun favoriteDao(): FavoriteDAO

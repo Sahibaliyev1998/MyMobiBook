@@ -37,8 +37,8 @@ class DashboardActivity : AppCompatActivity() {
     fun frm(){
         nob(homeFragment)
 
-        binding.bnbDashboard.setOnItemSelectedListener  {
-            when (it){
+        binding.bnbDashboard.setOnItemSelectedListener {
+            when (it) {
                 R.id.home -> nob(homeFragment)
                 R.id.category -> nob(categoryFragment)
                 R.id.favorit -> nob(favoriteFragment)
@@ -47,9 +47,12 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
-    fun nob (fragment: Fragment){
+
+    //backstack
+    fun nob(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragment , fragment)
+            replace(R.id.fragment, fragment)
+            addToBackStack("db")
             commit()
         }
     }

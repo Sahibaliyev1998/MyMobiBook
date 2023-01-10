@@ -1,12 +1,22 @@
 package com.sahibaliyev.mymobibook.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
-data class BookModel (val id: Int,
-                      val name: String,
-                      val author: String,
-                      val image: String,
-                      val category: ArrayList<String>,
-                      val description: String,
-                      val pdf : String
-                      ) : Serializable
+@Entity(tableName = "Favorite")
+data class BookModel(
+    @PrimaryKey
+    @ColumnInfo(name = "id") val id: Long,
+    @ColumnInfo(name = "name") val name: String,
+    @ColumnInfo(name = "image") val image: String,
+    @ColumnInfo(name = "author") val author: String,
+    @ColumnInfo(name = "category") val category: String,
+    @ColumnInfo() val description: String,
+    @ColumnInfo() val pdf: String
+) : Serializable
+
+
+//@Transient serilezable elemeden
+//ctrl + alt + l
